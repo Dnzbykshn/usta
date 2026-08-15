@@ -83,7 +83,7 @@ class Asistan:
              + prompts.kullanici_mesaji(baglam, soru)},
         ]
 
-    def akisli(self, soru: str):
+    def akisli(self, soru: str, aciliyet_satiri: bool = True):
         """(arama_sonucu, satır üreteci) döner.
 
         Cevabın tamamı 13-16 sn sürüyor; akışla ilk satır ~1 sn'de görünüyor.
@@ -94,7 +94,8 @@ class Asistan:
             return arama, iter(["Bu bilgi elimdeki dokümanlarda yok."])
 
         if arama.yol == "exact":
-            metin = "\n\n".join(output.bicimlendir_chunk(s) for s in arama.sonuclar)
+            metin = "\n\n".join(
+                output.bicimlendir_chunk(s, aciliyet_satiri) for s in arama.sonuclar)
             return arama, iter(metin.splitlines())
 
         def uret():

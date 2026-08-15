@@ -224,7 +224,7 @@ def main() -> None:
 
     t0 = time.perf_counter()
     with st.spinner("Aranıyor..."):
-        arama, satirlar = usta.akisli(soru)
+        arama, satirlar = usta.akisli(soru, aciliyet_satiri=False)
     t_arama = time.perf_counter() - t0
 
     if arama.cevrildi:

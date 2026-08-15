@@ -84,12 +84,94 @@ def dusunmeyi_ayikla(metin: str) -> str:
     return metin.strip()
 
 
+# Satır İÇİ tekrar: model aynı cümleyi tek satırda arka arkaya yazabiliyor
+# ("... sona erir. ... sona erir. ..."). Satır bazlı tekilleştirme bunu
+# yakalamaz, çünkü satırın tamamı benzersizdir.
+_CUMLE = re.compile(r"(?<=[.!?])\s+")
+
+
+# Bitişik kelime öbeği tekrarı: "boyutlandırılmışsa, boyutlandırılmışsa,"
+# IGNORECASE gerekli: model tekrarı bazen farklı büyük/küçük harfle üretiyor
+# ("Kontrol edin, kontrol edin"). Desende Türkçeye özgü LİTERAL karakter yok,
+# bu yüzden daha önce dil tespitinde yaşanan İ/ı katlama sorunu burada geçerli
+# değil — karşılaştırma yalnızca yakalanan metin üzerinde.
+_OBEK_TEKRAR = re.compile(r"\b(\w+(?:\s+\w+){0,2})([,;]\s*)\1\b",
+                          re.UNICODE | re.IGNORECASE)
+
+
+def _satir_ici_temizle(satir: str) -> str:
+    """Bir satırın içindeki tekrarları siler.
+
+    Üç ayrı tekrar biçimi var, üçü de gözlemlendi:
+      1. Aynı cümle iki kez  — "... sona erir. ... sona erir."
+      2. Bitişik öbek tekrarı — "boyutlandırılmışsa, boyutlandırılmışsa,"
+      3. Sonda yarım parça   — "... sona erir. Fren"
+
+    Cümle karşılaştırmasında İÇERİLME kullanılıyor, birebir eşitlik değil:
+    "**Uyarı:** X" ile "X" birebir farklıdır ama ikincisi birincinin içinde
+    geçer. Sadece 4+ kelimelik parçalara uygulanıyor, kısa maddeler yanlışlıkla
+    elenmesin diye.
+    """
+    # Yalnızca \1 ile değiştir: tekrarın ayırıcısı da gitmeli, yoksa
+    # "X, X, Y" -> "X, , Y" gibi boşta virgül kalır. İkiden fazla tekrar
+    # için birkaç tur döndürülüyor.
+    for _ in range(3):
+        yeni = _OBEK_TEKRAR.sub(r"\1", satir)
+        if yeni == satir:
+            break
+        satir = yeni
+
+    parcalar = _CUMLE.split(satir)
+    if len(parcalar) < 2:
+        return satir
+
+    tutulan: list[str] = []
+    anahtarlar: list[str] = []
+    for p in parcalar:
+        a = _anahtar(p)
+        if not a:
+            tutulan.append(p)
+            continue
+        if len(a.split()) >= 4 and any(a in b or b in a for b in anahtarlar):
+            continue
+        anahtarlar.append(a)
+        tutulan.append(p)
+
+    # Sonda noktalamasız kısa parça kaldıysa (kesilmiş cümle) at
+    if len(tutulan) > 1:
+        son = tutulan[-1].rstrip()
+        if son and not son.endswith((".", ":", "!", "?", ")", "]")) \
+                and len(son.split()) < 4:
+            tutulan.pop()
+
+    return " ".join(tutulan)
+
+
+def _yarim_kalani_at(metin: str) -> str:
+    """max_tokens sınırında kesilen son parçayı atar.
+
+    Cevap cümle ortasında bitiyorsa ("... boyutlandırılmışsa, doğru boy")
+    ekranda yarım kalmış görünür. Son satır noktalama ile bitmiyorsa ve
+    öncesinde tam cümle varsa, yarım parça düşürülür.
+    """
+    satirlar = metin.rstrip().splitlines()
+    while satirlar:
+        son = satirlar[-1].rstrip()
+        if not son or son.endswith((".", ":", "!", "?", ")", "]")):
+            break
+        if len(satirlar) == 1:         # tek satır kaldıysa dokunma
+            break
+        satirlar.pop()
+    return "\n".join(satirlar)
+
+
 def tekrarlari_temizle(metin: str) -> str:
-    """Aynı satırın tekrarlarını siler, boş kalan başlıkları düşürür."""
+    """Satır arası ve satır içi tekrarları siler, yarım kalan sonu atar."""
     cikti: list[str] = []
     tekil = _Tekilleyici()
 
     for satir in metin.splitlines():
+        satir = _satir_ici_temizle(satir)
         a = _anahtar(satir)
         if not a:                      # boş satır — biçimi koru
             cikti.append(satir)
@@ -107,7 +189,7 @@ def tekrarlari_temizle(metin: str) -> str:
                 continue
         temiz.append(satir)
 
-    return re.sub(r"\n{3,}", "\n\n", "\n".join(temiz)).strip()
+    return _yarim_kalani_at(re.sub(r"\n{3,}", "\n\n", "\n".join(temiz)).strip())
 
 
 class CevapAkisi:
@@ -125,6 +207,7 @@ class CevapAkisi:
     def __init__(self) -> None:
         self._tampon = ""
         self._think_bitti = False
+        self._basladi = False          # ilk dolu satır yayınlandı mı
         self._tekil = _Tekilleyici()
 
     def _think_kontrol(self) -> bool:
@@ -143,9 +226,13 @@ class CevapAkisi:
         return False
 
     def _satir_ver(self, satir: str) -> str | None:
+        satir = _satir_ici_temizle(satir)
         a = _anahtar(satir)
         if not a:
-            return satir
+            # Cevabın BAŞINDAKİ boş satırları yut. <think> bloğu ayıklandıktan
+            # sonra tamponda "\n\n" kalıyor ve ekranda iki boş satır oluşuyor.
+            return satir if self._basladi else None
+        self._basladi = True
         return satir if self._tekil.kabul(a) else None
 
     def besle(self, parca: str) -> list[str]:
@@ -199,8 +286,12 @@ _ALAN = re.compile(
 )
 
 
-def bicimlendir_chunk(sonuc) -> str:
-    """Bir chunk'ı LLM olmadan okunabilir cevaba dönüştürür."""
+def bicimlendir_chunk(sonuc, aciliyet_satiri: bool = True) -> str:
+    """Bir chunk'ı LLM olmadan okunabilir cevaba dönüştürür.
+
+    aciliyet_satiri=False: arayüz aciliyeti zaten rozet olarak gösteriyorsa
+    metinde tekrarlanmasın (CLI'da rozet yok, orada True kalır).
+    """
     satirlar = sonuc.content.splitlines()
 
     # İlk satır "KOD — Başlık", ikinci satır "[Marka Model]"
@@ -216,7 +307,7 @@ def bicimlendir_chunk(sonuc) -> str:
                 "both": "WARNING/ALARM — yapılandırmaya bağlı"}.get(sonuc.severity)
 
     parcalar = [baslik]
-    if aciliyet:
+    if aciliyet and aciliyet_satiri:
         parcalar.append(f"({aciliyet})")
     parcalar += ["", govde]
     return "\n".join(parcalar).strip()
