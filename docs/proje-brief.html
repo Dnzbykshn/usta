@@ -1,0 +1,1149 @@
+<title>USTA Saha Asistanı</title>
+<style>
+  :root {
+    --ground:      #EFF1EF;
+    --surface:     #FAFBFA;
+    --surface-2:   #E4E8E4;
+    --ink:         #14191C;
+    --ink-2:       #4B565C;
+    --ink-3:       #7D888E;
+    --rule:        #C9D0CB;
+    --rule-soft:   #DDE2DD;
+    --accent:      #A02128;
+    --accent-soft: #F2DFDE;
+    --alarm:       #9A6708;
+    --alarm-soft:  #F5E9CC;
+    --ok:          #2E6A4E;
+    --ok-soft:     #DCE9E1;
+    --mono-bg:     #E7EBE7;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:      #131719;
+      --surface:     #1B2023;
+      --surface-2:   #262C30;
+      --ink:         #E5E9E6;
+      --ink-2:       #A2ADB2;
+      --ink-3:       #77838A;
+      --rule:        #333A3E;
+      --rule-soft:   #262C30;
+      --accent:      #E4675E;
+      --accent-soft: #3B201E;
+      --alarm:       #E5B54C;
+      --alarm-soft:  #352B13;
+      --ok:          #6EBF95;
+      --ok-soft:     #17301F;
+      --mono-bg:     #222A2D;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground:      #131719;
+    --surface:     #1B2023;
+    --surface-2:   #262C30;
+    --ink:         #E5E9E6;
+    --ink-2:       #A2ADB2;
+    --ink-3:       #77838A;
+    --rule:        #333A3E;
+    --rule-soft:   #262C30;
+    --accent:      #E4675E;
+    --accent-soft: #3B201E;
+    --alarm:       #E5B54C;
+    --alarm-soft:  #352B13;
+    --ok:          #6EBF95;
+    --ok-soft:     #17301F;
+    --mono-bg:     #222A2D;
+  }
+
+  :root {
+    --f-display: "Avenir Next Condensed", "HelveticaNeue-CondensedBold",
+                 "Arial Narrow", "Helvetica Neue", Helvetica, sans-serif;
+    --f-body:    Charter, "Bitstream Charter", "Iowan Old Style", Georgia,
+                 "Times New Roman", serif;
+    --f-mono:    ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas,
+                 "Liberation Mono", monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--f-body);
+    font-size: 17px;
+    line-height: 1.62;
+    margin: 0;
+    padding: 0 1.25rem 6rem;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 62rem;
+    margin: 0 auto;
+  }
+
+  /* ---------- masthead ---------- */
+
+  .masthead {
+    padding: 4.5rem 0 2rem;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .eyebrow {
+    font-family: var(--f-mono);
+    font-size: 0.688rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  .eyebrow .dot { color: var(--rule); }
+
+  h1 {
+    font-family: var(--f-display);
+    font-size: clamp(3.2rem, 11vw, 6rem);
+    line-height: 0.9;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    margin: 0 0 0.4rem;
+    text-wrap: balance;
+  }
+
+  .expand {
+    font-family: var(--f-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.75rem;
+  }
+
+  .lede {
+    font-size: 1.28rem;
+    line-height: 1.5;
+    max-width: 34ch;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  /* ---------- spec strip ---------- */
+
+  .spec {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+    gap: 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .spec div {
+    padding: 1.1rem 1.1rem 1.1rem 0;
+    border-right: 1px solid var(--rule-soft);
+  }
+  .spec div:last-child { border-right: 0; }
+  .spec dt {
+    font-family: var(--f-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 0.4rem;
+  }
+  .spec dd {
+    margin: 0;
+    font-family: var(--f-display);
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  /* ---------- sections ---------- */
+
+  section {
+    display: grid;
+    grid-template-columns: 5rem minmax(0, 1fr);
+    gap: 0 2rem;
+    padding: 3.25rem 0 0;
+  }
+
+  .num {
+    font-family: var(--f-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    padding-top: 0.5rem;
+  }
+
+  .body { max-width: 40rem; }
+  .body > * { max-width: 34em; }
+  .body > .full, .body > figure, .body > .tablewrap { max-width: none; }
+
+  h2 {
+    font-family: var(--f-display);
+    font-size: clamp(1.6rem, 4vw, 2.15rem);
+    line-height: 1.05;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.015em;
+    margin: 0 0 1rem;
+    text-wrap: balance;
+  }
+
+  h3 {
+    font-family: var(--f-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    margin: 2rem 0 0.6rem;
+    font-weight: 600;
+  }
+
+  p { margin: 0 0 1rem; }
+  .body > p:last-child { margin-bottom: 0; }
+
+  strong { font-weight: 700; }
+
+  /* ---------- inline code ---------- */
+
+  code {
+    font-family: var(--f-mono);
+    font-size: 0.84em;
+    background: var(--mono-bg);
+    padding: 0.1em 0.36em;
+    border-radius: 2px;
+  }
+
+  .fc {
+    font-family: var(--f-mono);
+    font-size: 0.84em;
+    background: var(--accent-soft);
+    color: var(--accent);
+    padding: 0.1em 0.4em;
+    border-left: 2px solid var(--accent);
+    border-radius: 0 2px 2px 0;
+    white-space: nowrap;
+  }
+  .fc.a {
+    background: var(--alarm-soft);
+    color: var(--alarm);
+    border-left-color: var(--alarm);
+  }
+
+  /* ---------- code block ---------- */
+
+  pre {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--ink-3);
+    padding: 1.1rem 1.25rem;
+    overflow-x: auto;
+    font-family: var(--f-mono);
+    font-size: 0.78rem;
+    line-height: 1.65;
+    margin: 1.25rem 0;
+    tab-size: 2;
+  }
+  pre code { background: none; padding: 0; font-size: inherit; }
+  .cm { color: var(--ink-3); }
+  .kw { color: var(--accent); }
+
+  /* ---------- tables ---------- */
+
+  .tablewrap { overflow-x: auto; margin: 1.5rem 0; }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 30rem;
+    font-size: 0.92rem;
+  }
+  th, td {
+    text-align: left;
+    padding: 0.66rem 1rem 0.66rem 0;
+    border-bottom: 1px solid var(--rule-soft);
+    vertical-align: top;
+  }
+  th {
+    font-family: var(--f-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    border-bottom: 1px solid var(--rule);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  td.n {
+    font-family: var(--f-mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+  tr:last-child td { border-bottom: 0; }
+
+  /* ---------- scope columns ---------- */
+
+  .scope {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  .scope > div {
+    border-top: 2px solid var(--ink);
+    padding-top: 0.9rem;
+  }
+  .scope > div.out { border-top-color: var(--rule); }
+  .scope h4 {
+    font-family: var(--f-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    margin: 0 0 0.7rem;
+    color: var(--ink-2);
+  }
+  .scope ul { margin: 0; padding-left: 1.1rem; }
+  .scope li { margin-bottom: 0.45rem; font-size: 0.95rem; line-height: 1.45; }
+  .scope .out li { color: var(--ink-2); }
+
+  /* ---------- decision block ---------- */
+
+  .decision {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-top: 3px solid var(--accent);
+    padding: 1.35rem 1.5rem;
+    margin: 1.5rem 0;
+  }
+  .decision .lbl {
+    font-family: var(--f-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  .decision p:last-child { margin-bottom: 0; }
+
+  /* ---------- warning ---------- */
+
+  .warn {
+    background: var(--alarm-soft);
+    border-left: 3px solid var(--alarm);
+    padding: 1.2rem 1.4rem;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+  }
+  .warn .lbl {
+    font-family: var(--f-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--alarm);
+    display: block;
+    margin-bottom: 0.45rem;
+    font-weight: 600;
+  }
+  .warn p:last-child { margin-bottom: 0; }
+
+  /* ---------- diagram ---------- */
+
+  figure { margin: 1.75rem 0; }
+  .figwrap {
+    overflow-x: auto;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    padding: 1.25rem;
+  }
+  .figwrap svg { display: block; width: 100%; min-width: 34rem; height: auto; }
+  figcaption {
+    font-family: var(--f-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.06em;
+    color: var(--ink-3);
+    margin-top: 0.7rem;
+    line-height: 1.6;
+  }
+
+  .dg-box  { fill: var(--surface-2); stroke: var(--rule); stroke-width: 1; }
+  .dg-key  { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1; }
+  .dg-grp  { fill: none; stroke: var(--rule); stroke-width: 1; stroke-dasharray: 3 3; }
+  .dg-line { fill: none; stroke: var(--ink-3); stroke-width: 1.25; }
+  .dg-t    { font-family: var(--f-display); font-size: 14px; fill: var(--ink);
+             text-transform: uppercase; letter-spacing: 0.03em; }
+  .dg-s    { font-family: var(--f-mono); font-size: 10.5px; fill: var(--ink-2); }
+  .dg-l    { font-family: var(--f-mono); font-size: 10px; fill: var(--accent);
+             letter-spacing: 0.1em; }
+  .dg-g    { font-family: var(--f-mono); font-size: 9.5px; fill: var(--ink-3);
+             letter-spacing: 0.12em; }
+
+  /* ---------- timeline ---------- */
+
+  .weeks { margin: 1.5rem 0 0; padding: 0; list-style: none; }
+  .weeks li {
+    display: grid;
+    grid-template-columns: 4.5rem minmax(0, 1fr);
+    gap: 1.25rem;
+    padding: 0.95rem 0;
+    border-bottom: 1px solid var(--rule-soft);
+    align-items: baseline;
+  }
+  .weeks li:last-child { border-bottom: 0; }
+  .weeks .wk {
+    font-family: var(--f-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    font-variant-numeric: tabular-nums;
+  }
+  .weeks .wt {
+    font-family: var(--f-display);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    font-size: 1.02rem;
+    display: block;
+    margin-bottom: 0.15rem;
+  }
+  .weeks .wd { font-size: 0.92rem; color: var(--ink-2); line-height: 1.45; }
+  .weeks li.here .wk { color: var(--accent); }
+  .weeks li.done .wk { color: var(--ok); }
+  .weeks li.done .wk::after { content: " ✓"; }
+
+  /* ---------- risks ---------- */
+
+  .sev {
+    font-family: var(--f-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.16em 0.5em;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+  .sev.hi { background: var(--accent-soft); color: var(--accent); }
+  .sev.md { background: var(--alarm-soft); color: var(--alarm); }
+  .sev.lo { background: var(--ok-soft); color: var(--ok); }
+
+  /* ---------- footer ---------- */
+
+  footer {
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid var(--ink);
+    font-family: var(--f-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    color: var(--ink-3);
+    line-height: 1.9;
+  }
+
+  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 40rem) {
+    body { font-size: 16px; }
+    section { grid-template-columns: 1fr; gap: 0; padding-top: 2.5rem; }
+    .num { padding: 0 0 0.5rem; }
+    .spec div { border-right: 0; border-bottom: 1px solid var(--rule-soft); }
+    .masthead { padding-top: 3rem; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="eyebrow">
+      <span>Proje Brief</span><span class="dot">/</span>
+      <span>v0.4 — Hafta 6</span><span class="dot">/</span>
+      <span>Yaz Okulu · Foundry Local</span>
+    </div>
+    <h1>USTA</h1>
+    <div class="expand">Universal Servis &amp; Teknik Asistan</div>
+    <p class="lede">
+      Sinyalin olmadığı sahada çalışan, çok markalı motor sürücüsü arıza asistanı.
+      Tüm çıkarım cihaz üzerinde — sıfır ağ isteği.
+    </p>
+  </header>
+
+  <dl class="spec">
+    <div><dt>Alan</dt><dd>Endüstriyel bakım</dd></div>
+    <div><dt>Kullanıcı</dt><dd>Saha teknisyeni</dd></div>
+    <div><dt>Süre</dt><dd>6 hafta</dd></div>
+    <div><dt>Çalışma zamanı</dt><dd>Foundry Local</dd></div>
+    <div><dt>Ağ</dt><dd>Yok</dd></div>
+    <div><dt>Hata kodu</dt><dd>580</dd></div>
+  </dl>
+
+  <section>
+    <div class="num">§ 1</div>
+    <div class="body">
+      <h2>Problem</h2>
+      <p>
+        Bir üretim hattında farklı markaların frekans kontrollü motor sürücüleri
+        yan yana çalışır. Bakım teknisyeni bir arızaya müdahale ettiğinde
+        ekipmanın ekranında yalnızca kısa bir kod görür — <span class="fc">F30002</span>
+        gibi. Bu kodun ne anlama geldiği, olası nedenleri ve kontrol adımları
+        üreticinin manuelinde, çoğu zaman 1.500 sayfalık bir PDF'in içinde bir
+        tablo satırındadır.
+      </p>
+      <p>
+        Teknisyenin karşılaştığı üç engel şu: her marka için ayrı bir manuel
+        taşıması gerekir, sahada bu PDF'lerde arama yapmak pratik değildir ve
+        makine dairesi, gemi ambarı, rüzgâr türbini gövdesi gibi ortamlarda
+        <strong>bağlantı yoktur.</strong>
+      </p>
+      <p>
+        USTA bu üç manueli tek bir çevrimdışı asistanda birleştirir: doğal dille
+        sorulan soruyu ilgili manuel bölümüne bağlar, cevabı kaynak sayfasıyla
+        birlikte döndürür ve karşılığı yoksa uydurmak yerine reddeder.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="num">§ 2</div>
+    <div class="body">
+      <h2>Neden cihaz üstü çalışıyor</h2>
+      <p>
+        Bu projenin tercih değil <strong>zorunluluk</strong> olarak yerel çalışmasının
+        iki ayrı gerekçesi var; ikisi de bulut tabanlı bir alternatifi fiilen
+        devre dışı bırakıyor.
+      </p>
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr><th>Gerekçe</th><th>Ayrıntı</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Bağlantı yok</td>
+              <td>Makine daireleri, metal kabinli tesisler ve saha noktalarında hücresel sinyal ya da Wi-Fi güvenilir değildir. Asistanın çalıştığı an, tam olarak bağlantının olmadığı andır.</td>
+            </tr>
+            <tr>
+              <td>Veri dışarı çıkamaz</td>
+              <td>Sorgunun kendisi hangi hatta hangi ekipmanın arızalandığını ifşa eder. Üretim kesintisi bilgisi ticari açıdan hassastır; birçok tesiste OT ağı zaten internete kapalıdır.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        Bu ikisi bir arada olduğunda, projenin sunumunda savunulacak bir konu
+        kalmıyor: aynı işi bir bulut modeli daha iyi yapamaz, çünkü ona
+        ulaşılamaz.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="num">§ 3</div>
+    <div class="body">
+      <h2>Kapsam</h2>
+      <div class="scope">
+        <div>
+          <h4>Kapsam içi</h4>
+          <ul>
+            <li>Üç sürücü ailesinin hata ve alarm kodları</li>
+            <li>Parametre açıklamaları ve devreye alma prosedürleri</li>
+            <li>Doğal dille belirti tarifi (&ldquo;motor yavaşlarken duruyor&rdquo;)</li>
+            <li>Markalar arası kod karşılaştırması</li>
+            <li>Kaynak atfı: manuel adı + sayfa numarası</li>
+            <li>Bilgi tabanı dışı sorularda reddetme</li>
+          </ul>
+        </div>
+        <div class="out">
+          <h4>Kapsam dışı</h4>
+          <ul>
+            <li>Ekipmana bağlanma, canlı telemetri okuma</li>
+            <li>Kestirimci bakım, arıza tahmini</li>
+            <li>Taranmış (görüntü tabanlı) manueller — OCR yok</li>
+            <li>Çok kullanıcılı sunucu dağıtımı</li>
+            <li>Parametre yazma veya ekipman kumandası</li>
+            <li>Sürücü dışı ekipman (PLC, robot, CNC)</li>
+          </ul>
+        </div>
+      </div>
+      <p>
+        Kapsam dışı listesinin en önemli maddesi sonuncu: sistem yalnızca
+        <em>okur</em>. Hiçbir noktada ekipmana yazma yetkisi yok — bu, güvenlik
+        çerçevesinin temeli.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="num">§ 4</div>
+    <div class="body">
+      <h2>Bilgi tabanı</h2>
+      <p>
+        Üç manuel de indirildi ve tarandı. Aşağıdaki sayılar tahmin değil, PDF'ler
+        üzerinde ölçüldü.
+      </p>
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr><th>Marka</th><th>Doküman</th><th class="n">Sayfa</th><th>Arıza bölümü</th><th class="n">Kod</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Siemens</td><td>G120C List Manual</td><td class="n">570</td><td class="n">s. 462+</td><td class="n">277</td></tr>
+            <tr><td>ABB</td><td>ACS580 Firmware Manual</td><td class="n">632</td><td class="n">s. 535+</td><td class="n">191</td></tr>
+            <tr><td>Danfoss</td><td>FC 301/302 Programming Guide</td><td class="n">298</td><td class="n">s. 283+</td><td class="n">112</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        Toplam <strong>580 hata kodu</strong> — her biri bir chunk, sıfır kayıp
+        (kapsama testi üç ayrıştırıcıda da geçiyor). 1024 boyutlu vektörlerle
+        birlikte 2.4 MB.
+        Bu ölçekte tüm vektörleri belleğe alıp tek bir NumPy matris çarpımıyla
+        karşılaştırmak milisaniye sürüyor, dolayısıyla ayrı bir vektör veritabanı
+        katmanı kurulmuyor.
+      </p>
+
+      <h3>Üç marka, üç kodlama şeması</h3>
+      <p>
+        İnceleme sırasında çıkan en önemli bulgu: üreticiler ortak bir kod biçimi
+        kullanmıyor. Tek bir global desenle üçünü birden yakalamak mümkün değil.
+      </p>
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr><th>Marka</th><th>Biçim</th><th>Örnek</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Siemens</td><td>harf + 5 hane</td><td><span class="fc">F30002</span> <span class="fc a">A01009</span></td></tr>
+            <tr><td>ABB</td><td>4 karakter onaltılık</td><td><span class="fc">2310</span> <span class="fc">A5EA</span></td></tr>
+            <tr><td>Danfoss</td><td>kelime + sayı</td><td><span class="fc a">ALARM 79</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        Siemens'te <span class="fc">F</span> sürücüyü durduran <em>fault</em>,
+        <span class="fc a">A</span> çalışmaya devam eden <em>alarm</em> anlamına
+        geliyor; Danfoss aynı ayrımı <em>WARNING</em> / <em>ALARM</em> kelimeleriyle
+        yapıyor. Bu aciliyet ayrımı cevaplarda korunuyor — teknisyenin hattı
+        durdurup durdurmayacağına karar vermesi buna bağlı.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="num">§ 5</div>
+    <div class="body">
+      <h2>Retrieval mimarisi</h2>
+
+      <div class="decision">
+        <span class="lbl">Karar 01 — Hibrit arama</span>
+        <p>
+          Embedding modelleri kısa alfanümerik kodları ayırt edemez.
+          <span class="fc">F30002</span> ile <span class="fc">F30003</span>
+          string olarak neredeyse özdeştir, dolayısıyla vektörleri de neredeyse
+          özdeş çıkar ve kosinüs benzerliği ikisini karıştırır. Yani saf vektör
+          araması <strong>tam olarak en kritik sorguda</strong> yanlış hata kodunu
+          getirir — aşırı gerilim sorusuna düşük gerilim cevabı vermek demo'yu
+          bitirir.
+        </p>
+        <p>
+          Bu yüzden kod içeren sorgular vektör aramasına hiç girmiyor: yakalanıp
+          indeksli birebir SQL eşleşmesine yönlendiriliyor. Vektör araması yalnızca
+          belirti tarifi gibi doğal dil sorgularında devreye giriyor, orada da
+          BM25 ile birlikte.
+        </p>
+        <p>
+          <strong>Düzeltme (Hafta 1):</strong> İlk tasarım kodu yalnızca regex ile
+          yakalıyordu. Manueller incelenince bunun yetersiz olduğu görüldü — ABB'nin
+          dört karakterli onaltılık biçimi <span class="fc">2024</span> veya
+          <span class="fc">0000</span> gibi alakasız dizileri de yakalıyor. Kod
+          kümesi ingestion sırasında zaten çıkarıldığı için karar artık kümeye
+          bakılarak veriliyor: regex yalnızca aday üretir, eşleşme var olan kodlarla
+          doğrulanır. Yanlış pozitif ihtimali böylece sıfırlanıyor.
+        </p>
+      </div>
+
+      <figure>
+        <div class="figwrap">
+          <svg viewBox="0 0 820 620" role="img"
+               aria-label="Sorgu akışı: hata kodu içeren sorgular indeksli SQL eşleşmesine gidip LLM'e hiç uğramadan doğrudan biçimlendirilir; doğal dil sorguları önce İngilizceye çevrilir, ardından BM25 ve vektör aramasının birleştiği hibrit aramaya girer, benzerlik eşiğinin altındaysa reddedilir, üstündeyse Foundry Local modeliyle özetlenir.">
+            <defs>
+              <marker id="ah" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                <path d="M0,0 L6,3 L0,6 Z" fill="var(--ink-3)"></path>
+              </marker>
+            </defs>
+
+            <rect class="dg-box" x="310" y="8" width="200" height="40"></rect>
+            <text class="dg-t" x="410" y="33" text-anchor="middle">Kullanıcı sorgusu</text>
+            <path class="dg-line" d="M410,48 V62" marker-end="url(#ah)"></path>
+
+            <rect class="dg-key" x="250" y="68" width="320" height="54"></rect>
+            <text class="dg-t" x="410" y="91" text-anchor="middle">Sorguda hata kodu var mı?</text>
+            <text class="dg-s" x="410" y="110" text-anchor="middle">regex → kod kümesiyle doğrulanır</text>
+
+            <path class="dg-line" d="M410,122 V146 H145 V162" marker-end="url(#ah)"></path>
+            <path class="dg-line" d="M410,122 V146 H650 V162" marker-end="url(#ah)"></path>
+            <text class="dg-l" x="352" y="140" text-anchor="end">EVET</text>
+            <text class="dg-l" x="468" y="140">HAYIR</text>
+
+            <rect class="dg-box" x="25" y="168" width="240" height="54"></rect>
+            <text class="dg-t" x="145" y="191" text-anchor="middle">SQLite · indeksli</text>
+            <text class="dg-s" x="145" y="210" text-anchor="middle">WHERE fault_code = ?</text>
+            <path class="dg-line" d="M145,222 V246" marker-end="url(#ah)"></path>
+
+            <rect class="dg-key" x="25" y="252" width="240" height="54"></rect>
+            <text class="dg-t" x="145" y="275" text-anchor="middle">Doğrudan biçimlendirme</text>
+            <text class="dg-s" x="145" y="294" text-anchor="middle">LLM yok · 0.0 sn</text>
+
+            <rect class="dg-box" x="530" y="168" width="240" height="44"></rect>
+            <text class="dg-t" x="650" y="188" text-anchor="middle">Çeviri: TR → EN</text>
+            <text class="dg-s" x="650" y="204" text-anchor="middle">embedding iki dili hizalayamıyor</text>
+            <path class="dg-line" d="M650,212 V232" marker-end="url(#ah)"></path>
+
+            <rect class="dg-grp" x="515" y="238" width="280" height="150"></rect>
+            <text class="dg-g" x="528" y="256">HİBRİT ARAMA</text>
+
+            <path class="dg-line" d="M650,238 V254 H590 V262" marker-end="url(#ah)"></path>
+            <path class="dg-line" d="M650,254 H724 V262" marker-end="url(#ah)"></path>
+
+            <rect class="dg-box" x="528" y="268" width="124" height="44"></rect>
+            <text class="dg-t" x="590" y="288" text-anchor="middle">FTS5</text>
+            <text class="dg-s" x="590" y="304" text-anchor="middle">BM25</text>
+
+            <rect class="dg-box" x="662" y="268" width="124" height="44"></rect>
+            <text class="dg-t" x="724" y="288" text-anchor="middle">Vektör</text>
+            <text class="dg-s" x="724" y="304" text-anchor="middle">kosinüs</text>
+
+            <path class="dg-line" d="M590,312 V332" marker-end="url(#ah)"></path>
+            <path class="dg-line" d="M724,312 V332" marker-end="url(#ah)"></path>
+
+            <rect class="dg-box" x="528" y="338" width="244" height="42"></rect>
+            <text class="dg-t" x="650" y="364" text-anchor="middle">Skor birleştirme · RRF</text>
+
+            <path class="dg-line" d="M650,380 V394" marker-end="url(#ah)"></path>
+
+            <rect class="dg-key" x="530" y="400" width="240" height="50"></rect>
+            <text class="dg-t" x="650" y="422" text-anchor="middle">benzerlik ≥ 0.56 ?</text>
+            <text class="dg-s" x="650" y="440" text-anchor="middle">reddetme eşiği</text>
+
+            <path class="dg-line" d="M650,450 V474" marker-end="url(#ah)"></path>
+            <text class="dg-l" x="662" y="468">HAYIR</text>
+            <rect class="dg-box" x="530" y="480" width="240" height="44"></rect>
+            <text class="dg-t" x="650" y="507" text-anchor="middle">Bilgi dokümanlarda yok</text>
+
+            <path class="dg-line" d="M530,425 H390 V470" marker-end="url(#ah)"></path>
+            <text class="dg-l" x="520" y="418" text-anchor="end">EVET</text>
+
+            <rect class="dg-box" x="280" y="476" width="220" height="50"></rect>
+            <text class="dg-t" x="390" y="498" text-anchor="middle">Foundry Local</text>
+            <text class="dg-s" x="390" y="516" text-anchor="middle">özet üretimi · ~12 sn</text>
+
+            <path class="dg-line" d="M390,526 V554" marker-end="url(#ah)"></path>
+            <path class="dg-line" d="M145,306 V582 H274" marker-end="url(#ah)"></path>
+
+            <rect class="dg-key" x="280" y="560" width="220" height="44"></rect>
+            <text class="dg-t" x="390" y="587" text-anchor="middle">Cevap + kaynak atfı</text>
+          </svg>
+        </div>
+        <figcaption>
+          Şekil 1 — Sorgu yönlendirme (Hafta 5 hali). Kod içeren sorgular hem
+          aramayı hem MODELİ atlar: manuelin kendi girdisi doğrudan
+          biçimlendirilir, 0.0 sn sürer ve sadakat tanım gereği 1.00'dir.
+          Doğal dil sorguları önce çevrilir, ardından hibrit aramaya girer;
+          benzerlik eşiğin altındaysa model hiç çağrılmadan reddedilir.
+          Ölçülen 50 soruda trafiğin %30'u sol koldan, %20'si reddetmeden
+          geçiyor — yani yarısı modele hiç uğramıyor.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section>
+    <div class="num">§ 6</div>
+    <div class="body">
+      <h2>Chunk'lama</h2>
+
+      <div class="decision">
+        <span class="lbl">Karar 02 — Bir hata kodu = bir chunk</span>
+        <p>
+          Manuellerdeki fault list'ler tablo halindedir ve sabit boyutlu bölme
+          burada üç ayrı şekilde kırılır: PDF'ten metin çıkarırken sütunlar iç içe
+          geçer; bölme satırı ortadan keser ve kod bir chunk'ta kalırken çözümü
+          diğerine düşer; içinde on beş alakasız kod bulunan bir chunk'ın
+          embedding'i bulanıklaşır, hiçbir sorguyla iyi eşleşmez.
+        </p>
+        <p>
+          Çözüm, marka başına bir fault-table ayrıştırıcısı yazıp her kodu tek bir
+          chunk'a indirmek. Kod, chunk metninin içinde açıkça geçiyor — böylece
+          hem lexical hem semantik arama aynı chunk'ı buluyor.
+        </p>
+        <p>
+          <strong>Ölçüm (Hafta 1):</strong> Beklenen sütun karışması gerçekleşmedi.
+          Üç manuel de metin tabanlı (sayfa başına 1.700&ndash;2.900 karakter, OCR
+          gerekmiyor) ve çıkarım satır sırasını koruyor: kod, ardından adı, ardından
+          açıklaması ve çözümü geliyor. Danfoss daha da temiz — her alarm
+          <span class="fc a">ALARM 79, Illegal power section configuration</span>
+          biçiminde bağımsız bir paragraf. Ayrıştırıcı yazmak, öngörülenden belirgin
+          şekilde kolay olacak.
+        </p>
+      </div>
+
+      <h3>Hedef chunk biçimi</h3>
+<pre><code>F30002 — DC bara aşırı gerilim (Power unit: DC link overvoltage)
+
+Olası nedenler:
+  · Yavaşlama rampası çok kısa
+  · Fren direnci bağlı değil veya arızalı
+  · Şebeke gerilimi tolerans üstü
+
+Kontrol adımları:
+  1. p1121 rampa süresini artırın
+  2. Fren direnci bağlantısını ölçün
+
+<span class="cm">[Uyarı] DC bara kondansatörleri güç kesildikten sonra
+5 dakika yüksek gerilim tutar. LOTO uygulayın.</span>
+
+<span class="cm">— SINAMICS G120 List Manual, s.412</span></code></pre>
+      <p>
+        Güvenlik uyarısı chunk'ın <em>içine</em> gömülüyor. Böylece ilgili kod
+        getirildiğinde uyarı da bağlama giriyor ve modelin onu atlaması ihtimali
+        ortadan kalkıyor.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="num">§ 7</div>
+    <div class="body">
+      <h2>Veri modeli</h2>
+<pre><code><span class="kw">CREATE TABLE</span> documents (
+    id          <span class="kw">INTEGER PRIMARY KEY</span>,
+    vendor      <span class="kw">TEXT NOT NULL</span>,      <span class="cm">-- Siemens | ABB | Danfoss</span>
+    model       <span class="kw">TEXT NOT NULL</span>,      <span class="cm">-- SINAMICS G120</span>
+    source_file <span class="kw">TEXT NOT NULL</span>,
+    version     <span class="kw">TEXT</span>
+);
+
+<span class="kw">CREATE TABLE</span> chunks (
+    id         <span class="kw">INTEGER PRIMARY KEY</span>,
+    doc_id     <span class="kw">INTEGER NOT NULL REFERENCES</span> documents(id),
+    fault_code <span class="kw">TEXT</span>,                <span class="cm">-- 'F30002' ya da NULL</span>
+    section    <span class="kw">TEXT</span>,                <span class="cm">-- Fault list | Commissioning</span>
+    page       <span class="kw">INTEGER</span>,             <span class="cm">-- kaynak atfı için zorunlu</span>
+    content    <span class="kw">TEXT NOT NULL</span>,
+    embedding  <span class="kw">BLOB</span>                 <span class="cm">-- numpy float32 .tobytes()</span>
+);
+
+<span class="kw">CREATE INDEX</span> idx_fault_code <span class="kw">ON</span> chunks(fault_code);
+
+<span class="cm">-- hibrit aramanın lexical yarısı</span>
+<span class="kw">CREATE VIRTUAL TABLE</span> chunks_fts <span class="kw">USING</span> fts5(
+    content, content=<span class="kw">'chunks'</span>, content_rowid=<span class="kw">'id'</span>
+);</code></pre>
+      <p>
+        <code>page</code> alanı isteğe bağlı değil. Ekrandaki
+        <em>&ldquo;Kaynak: G120 List Manual, s.412&rdquo;</em> satırı, teknisyene
+        &ldquo;istersen git manuelden doğrula&rdquo; diyen tek unsur — asistanı
+        kara kutu olmaktan çıkaran şey bu.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="num">§ 8</div>
+    <div class="body">
+      <h2>Değerlendirme</h2>
+      <p>
+        Elli soruluk sabit bir test seti, beş kategoriye dağıtılıyor. Set proje
+        başında yazılıp dondurulur; iyileştirmeler bu sete bakılarak değil, ölçüm
+        sonrasında yapılır.
+      </p>
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr><th>Kategori</th><th class="n">Adet</th><th>Örnek</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>A · Birebir kod</td><td class="n">15</td><td>&ldquo;F30002 ne demek?&rdquo;</td></tr>
+            <tr><td>B · Belirti tarifi</td><td class="n">10</td><td>&ldquo;Motor yavaşlarken duruyor ve hata veriyor&rdquo;</td></tr>
+            <tr><td>C · Prosedür</td><td class="n">10</td><td>&ldquo;Fren direnci nasıl test edilir?&rdquo;</td></tr>
+            <tr><td>D · Markalar arası</td><td class="n">5</td><td>&ldquo;Bu hatanın ABB'deki karşılığı ne?&rdquo;</td></tr>
+            <tr><td>E · Cevaplanamaz</td><td class="n">10</td><td>&ldquo;Bu sürücünün fiyatı ne kadar?&rdquo;</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Sonuçlar — Hafta 5</h3>
+      <p>
+        Aşağıdaki değerler ölçülmüştür, hedef değil. Koşu
+        <span class="fc a">CHAT_SEED=42</span> ile tekrarlanabilir: iki ardışık
+        koşu birebir aynı sonucu veriyor.
+      </p>
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr><th>Metrik</th><th class="n">Hedef</th><th class="n">Ölçülen</th><th>Durum</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Recall@3 · kod</td><td class="n">≥ 0.95</td><td class="n">1.00</td><td><span class="sev lo">tuttu</span></td></tr>
+            <tr><td>Recall@3 · belirti</td><td class="n">≥ 0.80</td><td class="n">0.90</td><td><span class="sev lo">tuttu</span></td></tr>
+            <tr><td>Recall@3 · prosedür</td><td class="n">—</td><td class="n">0.70</td><td><span class="sev md">kapsam</span></td></tr>
+            <tr><td>Recall@3 · markalar arası</td><td class="n">—</td><td class="n">0.80</td><td><span class="sev lo">tuttu</span></td></tr>
+            <tr><td>Sadakat</td><td class="n">≥ 0.85</td><td class="n">0.96</td><td><span class="sev lo">tuttu</span></td></tr>
+            <tr><td><strong>Reddetme oranı</strong></td><td class="n">1.00</td><td class="n"><strong>1.00</strong></td><td><span class="sev lo">tuttu</span></td></tr>
+            <tr><td>Gecikme p95 · retrieval</td><td class="n">≤ 5 sn</td><td class="n">3.93 sn</td><td><span class="sev lo">tuttu</span></td></tr>
+            <tr><td>Gecikme · exact yol</td><td class="n">≤ 5 sn</td><td class="n">0.0 sn</td><td><span class="sev lo">tuttu</span></td></tr>
+            <tr><td>Gecikme · hibrit yol</td><td class="n">≤ 5 sn</td><td class="n">~12 sn</td><td><span class="sev hi">tutmadı</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        Bunların içinde en belirleyicisi <strong>reddetme oranı</strong>. Doğru
+        cevap veremeyen bir asistan işe yaramaz; ama <em>yanlış cevabı emin bir
+        tonla</em> veren bir asistan, elektrikli ekipman üzerinde çalışan birine
+        zarar verebilir. Hedef burada 0.95 değil 1.00 idi — ve tuttu: on
+        cevaplanamaz sorunun hiçbirine uydurma cevap verilmedi.
+      </p>
+      <p>
+        <strong>Sadakat 0.96 neden 1.00 değil?</strong> LLM yolunda cevapların
+        %4'ünde bağlamda geçmeyen bir teknik referans var. Exact yolda bu oran
+        yapısal olarak 1.00, çünkü tek kelime değişmiyor. Yani trafiği modelden
+        uzaklaştırmak sadece hızlandırmıyor, doğruluğu da artırıyor.
+      </p>
+
+      <h3>Kalibrasyon — reddetme eşiği</h3>
+      <p>
+        Eşik tahminle değil taramayla belirlendi
+        (<span class="fc">--esik-tara</span>), 35 hibrit sorgu üzerinden:
+      </p>
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr><th class="n">Eşik</th><th class="n">Reddetme</th><th class="n">Kaybedilen meşru sorgu</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="n">0.48</td><td class="n">0.60</td><td class="n">0</td></tr>
+            <tr><td class="n">0.52</td><td class="n">0.80</td><td class="n">2</td></tr>
+            <tr><td class="n">0.54</td><td class="n">0.90</td><td class="n">3</td></tr>
+            <tr><td class="n"><strong>0.56</strong></td><td class="n"><strong>1.00</strong></td><td class="n"><strong>4</strong></td></tr>
+            <tr><td class="n">0.60</td><td class="n">1.00</td><td class="n">7</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        0.56, reddetmeyi 1.00'e çıkaran en düşük eşik. Bedeli 25 hibrit sorgunun
+        dördünü kaybetmek — ve bu bedeli güvenlik çerçevesi seçti, biz değil.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="num">§ 9</div>
+    <div class="body">
+      <h2>Model deneyleri</h2>
+      <p>
+        Mevcut kurulum (<span class="fc">qwen3-4b</span> +
+        <span class="fc">qwen3-embedding-0.6b</span>, 3.4 GB) iki alternatife
+        karşı ölçülerek savunuldu. İkisi de elendi; ikisinin de gerekçesi
+        ölçümde.
+      </p>
+
+      <h3>Deney 1 — daha küçük sohbet modeli</h3>
+      <p>
+        Hipotez: gecikme asıl problem olduğuna göre küçük model daha iyi olur.
+        Retrieval dondurulup <em>yalnızca üretim modeli</em> değiştirildi, altı
+        soru üzerinde:
+      </p>
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr><th>Model</th><th class="n">Süre</th><th class="n">Sadakat</th><th class="n">Tekrar</th><th class="n">Biçim</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>qwen3-4b (mevcut)</td><td class="n">18.4 sn</td><td class="n">1.00</td><td class="n">1.8 satır</td><td class="n">6/6</td></tr>
+            <tr><td>qwen3.5-2b-text</td><td class="n">7.2 sn</td><td class="n">0.80</td><td class="n">4.2 satır</td><td class="n">4/6</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        2.6 kat hızlı, ama <strong>sadakat 1.00'den 0.80'e düştü</strong>: küçük
+        model her beş teknik referanstan birini uyduruyor. Somut örnek — Siemens
+        <span class="fc">F30002</span> bağlamı verildiğinde cevaba
+        <span class="fc a">2-15</span> diye bir parametre yazdı; bu bir
+        <em>Danfoss</em> parametre biçimi ve o bağlamda hiç geçmiyor. Sahadaki
+        teknisyen bunu okuyup yanlış parametreye giderdi. <strong>Elendi.</strong>
+      </p>
+
+      <h3>Deney 2 — daha büyük embedding modeli</h3>
+      <p>
+        Hipotez: <span class="fc">qwen3-embedding-8b</span> çok dilli hizalamayı
+        çözerse çeviri adımı silinir ve eşik ayrımı netleşir. 580 chunk yeniden
+        embed edildi (22 dakika).
+      </p>
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr><th>Ölçüt</th><th>0.6b (mevcut)</th><th>8b</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Çevirisiz Türkçe recall@3</td><td>0/4</td><td>5/8 — yetersiz</td></tr>
+            <tr><td>Eşik ayrımı (çeviriyle)</td><td>−0.050</td><td>−0.010 — fark yok denecek</td></tr>
+            <tr><td>Tek sorgu gecikmesi</td><td>0.03 sn</td><td>0.18 sn — sorun değil</td></tr>
+            <tr><td>RAM (sohbet modeliyle)</td><td>3.4 GB</td><td><strong>12.7 / 16 GB — takas</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        Çeviri adımı silinemedi, eşik düzelmedi, buna karşılık 16 GB'lik makineyi
+        takasa itti. <strong>Elendi.</strong>
+      </p>
+      <p>
+        Deney boşa gitmedi: eşik sorununun sanılan şey olmadığını gösterdi.
+        Bantları bozan tek bir sorgu var (&ldquo;enkoder sinyali kayboldu&rdquo;)
+        ve o sorgu iki modelde de retrieval'da başarısız — yani sorun model
+        büyüklüğünde değil, o sorgunun kendisinde.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="num">§ 10</div>
+    <div class="body">
+      <h2>Güvenlik ve sorumluluk</h2>
+      <div class="warn">
+        <span class="lbl">⚠ Ürün çerçevesi</span>
+        <p>
+          USTA bir <strong>doküman arama aracıdır</strong>, servis prosedürünün
+          yerine geçmez. Arayüzde bu ifade sabit olarak görünür ve sistem
+          prompt'unda karşılığı vardır.
+        </p>
+      </div>
+      <p>
+        Motor sürücülerinde DC bara kondansatörleri güç kesildikten sonra
+        dakikalarca yüksek gerilim tutar — bu, alanın en yaygın ciddi kaza
+        nedenlerinden biri. Sistemin buna dair üç kuralı var:
+      </p>
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr><th>Kural</th><th>Uygulama</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Uyarı düşmez</td><td>Müdahale adımı içeren her cevapta manueldeki ilgili güvenlik uyarısı yer alır — chunk'a gömülü olduğu için bağlamdan düşemez</td></tr>
+            <tr><td>Kaynaksız cevap yok</td><td>Her cevap manuel adı ve sayfa numarasıyla döner; doğrulama yolu her zaman açık</td></tr>
+            <tr><td>Sadece okuma</td><td>Sistem hiçbir noktada ekipmana bağlanmaz, parametre yazmaz, kumanda vermez</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="num">§ 11</div>
+    <div class="body">
+      <h2>Zaman planı</h2>
+      <ol class="weeks">
+        <li class="done">
+          <span class="wk">Hafta 1</span>
+          <span><span class="wt">Ortam ve temeller</span>
+          <span class="wd">Foundry Local 0.10.3, Python 3.12 venv, her iki model doğrulandı. Üç manuel indirildi ve tarandı; kod biçimleri ile arıza bölümü sayfa aralıkları çıkarıldı.</span></span>
+        </li>
+        <li class="done">
+          <span class="wk">Hafta 2</span>
+          <span><span class="wt">Embedding ve SQLite</span>
+          <span class="wd">Vektör üretimi, kosinüs benzerliği, şema kurulumu. Türkçe sorgu / İngilizce doküman eşleşmesinin ölçülmesi.</span></span>
+        </li>
+        <li class="done">
+          <span class="wk">Hafta 3</span>
+          <span><span class="wt">Ayrıştırma ve arama</span>
+          <span class="wd">Marka bazlı fault-table ayrıştırıcıları, ingestion boru hattı, FTS5 kurulumu ve hibrit arama katmanı.</span></span>
+        </li>
+        <li class="done">
+          <span class="wk">Hafta 4</span>
+          <span><span class="wt">Model entegrasyonu</span>
+          <span class="wd">Sistem prompt'u, cevap üretimi, kaynak atfı biçimi. Önce CLI; çalıştığı doğrulandıktan sonra Streamlit arayüzü.</span></span>
+        </li>
+        <li class="done">
+          <span class="wk">Hafta 5</span>
+          <span><span class="wt">Ölçüm</span>
+          <span class="wd">50 soruluk setin yazılması, metriklerin toplanması, tespit edilen zayıf noktalara göre tek bir iyileştirme turu.</span></span>
+        </li>
+        <li class="here">
+          <span class="wk">Hafta 6</span>
+          <span><span class="wt">Belgeleme ve demo</span>
+          <span class="wd">README, proje raporu, sunum. Demo Wi-Fi kapatılarak açılır.</span></span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section>
+    <div class="num">§ 12</div>
+    <div class="body">
+      <h2>Riskler</h2>
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr><th>Risk</th><th>Etki</th><th>Durum ve önlem</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Hibrit yolun cevap süresi</td>
+              <td><span class="sev md">Orta</span></td>
+              <td><strong>Açık — sınır kabul edildi.</strong> ~12 sn, hedef ≤ 5 sn. Model+donanım sınırı: qwen3-4b bu makinede ~20 token/sn üretiyor. Trafiğin yarısı (kod sorguları + reddetmeler) modele hiç gitmiyor; kalan yarıda streaming ilk satırı ~4 sn'de veriyor</td>
+            </tr>
+            <tr>
+              <td>Prosedür sorularında düşük recall</td>
+              <td><span class="sev md">Orta</span></td>
+              <td><strong>Açık — kapsam eksiği.</strong> 0.70. Sebep eşik değil: bilgi tabanına yalnızca arıza bölümleri alındı, parametre bölümleri alınmadı. &ldquo;Rampa süresi hangi parametreyle uzatılır&rdquo; sorusunun cevabı veritabanında yok</td>
+            </tr>
+            <tr>
+              <td>Türkçe cevapta teknik terim çeviri hatası</td>
+              <td><span class="sev lo">Düşük</span></td>
+              <td><strong>Çözüldü.</strong> Sistem prompt'u teknik terimleri İngilizce bırakmaya zorluyor; kod sorgularında ise LLM hiç devrede değil, manuel metni birebir aktarılıyor</td>
+            </tr>
+            <tr>
+              <td>Tekrarlama döngüsü</td>
+              <td><span class="sev lo">Düşük</span></td>
+              <td><strong>Çözüldü.</strong> frequency_penalty + presence_penalty tekrarı azalttı, deterministik satır tekilleştirme (birebir + ilk 5 kelime öneki) bitirdi</td>
+            </tr>
+            <tr>
+              <td>Ölçüm tekrarlanabilir değil</td>
+              <td><span class="sev lo">Düşük</span></td>
+              <td><strong>Çözüldü.</strong> Çeviri her koşuda farklı metin üretip recall'ı oynatıyordu (B 9/10↔8/10). random_seed=42 ile iki ardışık koşu birebir aynı</td>
+            </tr>
+            <tr>
+              <td>PDF tablo çıkarımı bozuk</td>
+              <td><span class="sev lo">Düşük</span></td>
+              <td><strong>Çözüldü.</strong> Üç manuel de metin tabanlı, çıkarım satır sırasını koruyor. OCR gerekmiyor, marka sayısını azaltmaya gerek yok</td>
+            </tr>
+            <tr>
+              <td>Python 3.14 paket uyumsuzluğu</td>
+              <td><span class="sev lo">Düşük</span></td>
+              <td><strong>Çözüldü.</strong> Proje 3.12.13 sanal ortamında kuruldu, bağımlılıklar sorunsuz</td>
+            </tr>
+            <tr>
+              <td>SDK dokümantasyonu güncel değil</td>
+              <td><span class="sev lo">Düşük</span></td>
+              <td><strong>Çözüldü.</strong> Learn tutorial'ındaki kod SDK 1.2.x ile çalışmıyor; doğru API çıkarıldı ve README'ye yazıldı</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    USTA · Proje Brief v0.4 · Hafta 6<br>
+    Ortam: Foundry Local 0.10.3 · Python 3.12.13 · qwen3-4b + qwen3-embedding-0.6b<br>
+    Kaynak plan: Summer School Foundry Local Plan — Faz 1&ndash;3<br>
+    Bu belge uygulama ilerledikçe güncellenir.
+  </footer>
+
+</div>

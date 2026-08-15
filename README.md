@@ -214,7 +214,8 @@ usta/
 │   ├── golden_set.yaml    50 soruluk değerlendirme seti
 │   └── run_eval.py
 └── docs/
-    └── PROJECT_BRIEF.md
+    ├── proje-brief.html      proje brief'i (tarayıcıda aç)
+    └── demo-day-sunum.html   sunum, 10 slayt
 ```
 
 ---
@@ -366,6 +367,18 @@ Motor sürücülerinde DC bara kondansatörleri güç kesildikten sonra dakikala
 yüksek gerilim tutar. Enerjili veya yeni enerjisi kesilmiş ekipmanda yapılacak her
 müdahalede LOTO (lockout/tagout) uygulanması ve üreticinin belirttiği bekleme
 süresine uyulması zorunludur.
+
+---
+
+## Belgeler
+
+| Belge | Açıklama |
+|---|---|
+| [`docs/proje-brief.html`](docs/proje-brief.html) | Proje brief'i — kapsam, mimari, teknik kararlar, ölçülmüş sonuçlar, model deneyleri |
+| [`docs/demo-day-sunum.html`](docs/demo-day-sunum.html) | Demo day sunumu, 10 slayt |
+
+İkisi de tek dosyalık, bağımlılıksız HTML — tarayıcıda doğrudan açılır.
+Ayrıntı: [`docs/README.md`](docs/README.md)
 
 ---
 

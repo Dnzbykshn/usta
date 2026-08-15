@@ -1,0 +1,508 @@
+<title>USTA Demo Day</title>
+<style>
+  /* Sunum bilinçli olarak TEK GÖRSEL DÜNYAYA bağlı: koyu endüstriyel panel.
+     Konunun kendi ortamı (HMI ekranı, pano içi) ve projeksiyonda tutarlı.
+     Tema anahtarı yok, bu yüzden her renk açıkça boyanıyor. */
+  :root {
+    --ground:   #0E1417;
+    --surface:  #161E23;
+    --surface2: #1E282E;
+    --ink:      #E8EDEA;
+    --ink-2:    #93A2A9;
+    --ink-3:    #64747C;
+    --rule:     #263238;
+    --red:      #E4675E;
+    --red-bg:   #2B1A18;
+    --amber:    #E5B54C;
+    --amber-bg: #2B2312;
+    --green:    #5FBF95;
+    --green-bg: #12281F;
+    --f-disp: "Avenir Next Condensed", "Arial Narrow", "Helvetica Neue", sans-serif;
+    --f-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    --f-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--f-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .deck { max-width: 62rem; margin: 0 auto; padding: 0 1.25rem 5rem; }
+
+  .slide {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-top: 3px solid var(--red);
+    padding: 2.5rem 2.75rem 2.75rem;
+    margin: 2rem 0;
+    min-height: 30rem;
+    display: flex;
+    flex-direction: column;
+    scroll-margin-top: 1rem;
+  }
+  .slide.title { border-top-color: var(--green); justify-content: center; }
+
+  .no {
+    font-family: var(--f-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.16em;
+    color: var(--ink-3);
+    margin-bottom: 1.4rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  h1 {
+    font-family: var(--f-disp);
+    font-size: clamp(3.5rem, 12vw, 7rem);
+    line-height: 0.88;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin: 0 0 0.5rem;
+    font-weight: 700;
+  }
+  h2 {
+    font-family: var(--f-disp);
+    font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+    line-height: 1.04;
+    text-transform: uppercase;
+    letter-spacing: 0.015em;
+    margin: 0 0 1.4rem;
+    font-weight: 700;
+    text-wrap: balance;
+  }
+  h3 {
+    font-family: var(--f-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    margin: 1.6rem 0 0.6rem;
+    font-weight: 600;
+  }
+
+  p { margin: 0 0 0.9rem; font-size: 1.02rem; line-height: 1.6; max-width: 46rem; }
+  .lead { font-size: 1.24rem; line-height: 1.5; color: var(--ink); max-width: 40rem; }
+  .dim { color: var(--ink-2); }
+  strong { color: var(--ink); font-weight: 700; }
+
+  .sub {
+    font-family: var(--f-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 2rem;
+  }
+
+  ul { margin: 0 0 1rem; padding-left: 1.1rem; max-width: 46rem; }
+  li { margin-bottom: 0.5rem; line-height: 1.55; }
+
+  code, .m {
+    font-family: var(--f-mono);
+    font-size: 0.86em;
+    background: var(--surface2);
+    padding: 0.12em 0.4em;
+    border-radius: 2px;
+    color: var(--ink);
+  }
+  .fc { color: var(--red); border-left: 2px solid var(--red); background: var(--red-bg); }
+  .fa { color: var(--amber); border-left: 2px solid var(--amber); background: var(--amber-bg); }
+  .fo { color: var(--green); border-left: 2px solid var(--green); background: var(--green-bg); }
+
+  /* ---- iki sütun ---- */
+  .two {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    gap: 1.6rem;
+    margin: 0.6rem 0 0;
+  }
+  .two > div { border-top: 2px solid var(--rule); padding-top: 0.9rem; }
+  .two > div.hot { border-top-color: var(--red); }
+  .two > div.good { border-top-color: var(--green); }
+  .two h4 {
+    font-family: var(--f-mono); font-size: 0.66rem; letter-spacing: 0.13em;
+    text-transform: uppercase; color: var(--ink-2); margin: 0 0 0.7rem;
+  }
+
+  /* ---- metrik ızgarası ---- */
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin: 1.2rem 0;
+  }
+  .metric { background: var(--surface); padding: 1rem 1.1rem; }
+  .metric .k {
+    font-family: var(--f-mono); font-size: 0.6rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--ink-3); margin-bottom: 0.45rem;
+  }
+  .metric .v {
+    font-family: var(--f-disp); font-size: 2.1rem; line-height: 1;
+    font-variant-numeric: tabular-nums; color: var(--green);
+  }
+  .metric .v.miss { color: var(--red); }
+  .metric .t { font-family: var(--f-mono); font-size: 0.62rem; color: var(--ink-3); margin-top: 0.35rem; }
+
+  /* ---- tablo ---- */
+  .tw { overflow-x: auto; margin: 1.1rem 0; }
+  table { border-collapse: collapse; width: 100%; min-width: 26rem; font-size: 0.92rem; }
+  th, td { text-align: left; padding: 0.55rem 0.9rem 0.55rem 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th {
+    font-family: var(--f-mono); font-size: 0.6rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--ink-3); white-space: nowrap;
+  }
+  td.n { font-family: var(--f-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .up { color: var(--green); }
+  .down { color: var(--red); }
+  tr:last-child td { border-bottom: 0; }
+
+  /* ---- terminal ---- */
+  .term {
+    background: var(--ground);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--green);
+    padding: 1rem 1.2rem;
+    font-family: var(--f-mono);
+    font-size: 0.76rem;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    overflow-x: auto;
+    color: var(--ink-2);
+    margin: 1rem 0;
+  }
+  .term b { color: var(--ink); font-weight: 600; }
+  .term .g { color: var(--green); }
+  .term .r { color: var(--red); }
+
+  .punch {
+    font-family: var(--f-disp);
+    font-size: clamp(1.5rem, 3.6vw, 2.1rem);
+    line-height: 1.15;
+    text-transform: uppercase;
+    color: var(--amber);
+    border-left: 3px solid var(--amber);
+    padding-left: 1rem;
+    margin: 1.6rem 0 0;
+    max-width: 42rem;
+  }
+
+  .cue {
+    border: 1px dashed var(--green);
+    background: var(--green-bg);
+    padding: 1.4rem 1.6rem;
+    margin: 1.2rem 0;
+  }
+  .cue h4 {
+    font-family: var(--f-mono); font-size: 0.66rem; letter-spacing: 0.13em;
+    text-transform: uppercase; color: var(--green); margin: 0 0 0.7rem;
+  }
+  .cue ol { margin: 0; padding-left: 1.2rem; }
+  .cue li { color: var(--ink); margin-bottom: 0.5rem; }
+
+  .foot {
+    margin-top: auto;
+    padding-top: 1.4rem;
+    font-family: var(--f-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.06em;
+    color: var(--ink-3);
+  }
+
+  @media (max-width: 40rem) {
+    .slide { padding: 1.6rem 1.3rem 2rem; min-height: 0; }
+  }
+  @media print {
+    /* Zemini beyaza çevirmek metin renklerini bozardı (açık üstüne açık).
+       Koyu tasarım baskıda da korunuyor; her slayt ayrı sayfa. */
+    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .deck { padding: 0; max-width: none; }
+    .slide { page-break-after: always; margin: 0; min-height: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { scroll-behavior: auto !important; }
+  }
+</style>
+
+<div class="deck">
+
+  <!-- 1 -->
+  <section class="slide title">
+    <div class="no"><span>USTA</span><span>01 / 10</span></div>
+    <h1>USTA</h1>
+    <div class="sub">Universal Servis &amp; Teknik Asistan</div>
+    <p class="lead">
+      Sinyalin olmadığı sahada çalışan, çok markalı motor sürücüsü arıza asistanı.
+      Tüm çıkarım cihaz üzerinde — sıfır ağ isteği.
+    </p>
+    <div class="foot">
+      Microsoft Foundry Local · RAG · Yaz Okulu Projesi &nbsp;·&nbsp;
+      Siemens SINAMICS G120C · ABB ACS580 · Danfoss VLT FC 302
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section class="slide">
+    <div class="no"><span>PROBLEM</span><span>02 / 10</span></div>
+    <h2>Teknisyen ekranda sadece bir kod görüyor</h2>
+    <p class="lead dim">
+      Sürücü durdu. Ekranda <span class="m fc">F30002</span> yazıyor. Bu kodun
+      ne anlama geldiği, 570 sayfalık bir PDF'in içinde bir tablo satırında.
+    </p>
+    <div class="two">
+      <div class="hot">
+        <h4>Üç engel</h4>
+        <ul>
+          <li>Hatta <strong>üç farklı marka</strong> sürücü var, üç ayrı manuel</li>
+          <li>Sahada PDF içinde arama yapmak pratik değil</li>
+          <li>Makine dairesinde, gemi ambarında, türbin gövdesinde <strong>bağlantı yok</strong></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Aynı arıza, üç ayrı ad</h4>
+        <div class="tw">
+          <table>
+            <tbody>
+              <tr><td>Siemens</td><td class="n"><span class="m fc">F06922</span></td></tr>
+              <tr><td>ABB</td><td class="n"><span class="m fc">7181</span></td></tr>
+              <tr><td>Danfoss</td><td class="n"><span class="m fa">ALARM 28</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="dim" style="font-size:.9rem">Üçü de &ldquo;fren direnci bozuk&rdquo; demek.</p>
+      </div>
+    </div>
+    <div class="punch">Tek markalı bir asistan &ldquo;manuel zaten elimde&rdquo; itirazını alır.</div>
+  </section>
+
+  <!-- 3 -->
+  <section class="slide">
+    <div class="no"><span>NEDEN CİHAZ ÜSTÜ</span><span>03 / 10</span></div>
+    <h2>Yerel çalışmak tercih değil, zorunluluk</h2>
+    <div class="two">
+      <div class="hot">
+        <h4>1 · Bağlantı yok</h4>
+        <p>
+          Metal kabinli tesislerde, makine dairelerinde hücresel sinyal
+          güvenilir değil. Asistanın çalıştığı an, tam olarak bağlantının
+          olmadığı andır.
+        </p>
+      </div>
+      <div class="hot">
+        <h4>2 · Veri dışarı çıkamaz</h4>
+        <p>
+          Sorgunun kendisi hangi hatta hangi ekipmanın arızalandığını ifşa eder.
+          Üretim kesintisi bilgisi ticari açıdan hassastır; birçok tesiste OT
+          ağı zaten internete kapalıdır.
+        </p>
+      </div>
+    </div>
+    <div class="punch">Aynı işi bir bulut modeli daha iyi yapamaz — çünkü ona ulaşılamaz.</div>
+  </section>
+
+  <!-- 4 -->
+  <section class="slide">
+    <div class="no"><span>NASIL ÇALIŞIYOR</span><span>04 / 10</span></div>
+    <h2>Üç yol, tek veritabanı</h2>
+    <div class="term">sorgu
+  │
+  ├─ hata kodu var mı? ──<b class="g">EVET</b>─▶ SQLite indeksli eşleşme
+  │                                    ▶ doğrudan biçimlendirme
+  │                                    <b class="g">model çağrılmaz · 0.0 sn</b>
+  │
+  └─ <b class="r">HAYIR</b> ─▶ TR→EN çeviri ─▶ BM25 + vektör ─▶ RRF
+                          │
+                          ├─ benzerlik &lt; 0.56 ─▶ <b class="r">&ldquo;bilgi yok&rdquo;</b>
+                          └─ benzerlik ≥ 0.56 ─▶ Foundry Local · özet</div>
+    <div class="metrics">
+      <div class="metric"><div class="k">Hata kodu</div><div class="v">580</div><div class="t">bir kod = bir chunk</div></div>
+      <div class="metric"><div class="k">Kaynak sayfa</div><div class="v">1500</div><div class="t">3 manuel · ~190 işlendi</div></div>
+      <div class="metric"><div class="k">Veritabanı</div><div class="v">15</div><div class="t">MB · SQLite+FTS5</div></div>
+      <div class="metric"><div class="k">Model</div><div class="v">3.4</div><div class="t">GB · qwen3-4b + emb</div></div>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section class="slide">
+    <div class="no"><span>KARAR 01</span><span>05 / 10</span></div>
+    <h2>Saf vektör araması bu alanda çalışmaz</h2>
+    <p class="lead">
+      <span class="m fc">F30002</span> ile <span class="m fc">F30003</span>
+      string olarak neredeyse özdeş. Vektörleri de öyle. Kosinüs benzerliği
+      ikisini <strong>karıştırır.</strong>
+    </p>
+    <p class="dim">
+      Yani saf vektör araması tam olarak en kritik sorguda yanlış kodu getirir —
+      aşırı gerilim sorusuna düşük gerilim cevabı.
+    </p>
+    <h3>Çözüm: hibrit arama</h3>
+    <ul>
+      <li>Kod içeren sorgular vektör aramasına <strong>hiç girmiyor</strong> → indeksli SQL</li>
+      <li>Regex tek başına yetmez: ABB'nin onaltılık biçimi <span class="m">2024</span>'ü de yakalar</li>
+      <li>Karar, ingestion'da kurulan <strong>gerçek kod kümesine</strong> bakılarak veriliyor</li>
+    </ul>
+    <div class="punch">Yanlış pozitif ihtimali sıfırlandı.</div>
+  </section>
+
+  <!-- 6 -->
+  <section class="slide">
+    <div class="no"><span>KARAR 02</span><span>06 / 10</span></div>
+    <h2>Sessiz hatalar, gürültülü hatalardan tehlikeli</h2>
+    <p class="lead dim">
+      Üç ayrı hata buldum. Hiçbiri hata mesajı vermedi. Üçü de sonucu
+      sessizce bozdu.
+    </p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Hata</th><th>Etkisi</th><th>Nasıl yakalandı</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Siemens <span class="m">(N)</span> son eki</td>
+            <td class="down">277 koddan 83'ü kayboldu (%30)</td>
+            <td>bağımsız sayımla karşılaştırma</td>
+          </tr>
+          <tr>
+            <td>ABB sayısal kodlar</td>
+            <td class="down">arıza listesinin tamamı silindi</td>
+            <td>bilinen kodun (<span class="m">2310</span>) yokluğu</td>
+          </tr>
+          <tr>
+            <td>PDF ligatürleri</td>
+            <td class="down"><span class="m">deﬁned</span> aranınca bulunamıyor</td>
+            <td>FTS sorgusunun 0 sonuç vermesi</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      Üçü de &ldquo;çalışıyor&rdquo; görünüyordu. Bu yüzden
+      <strong>kapsama testi</strong> kalıcı hale getirildi: ayrıştırıcının
+      bulduğu kod sayısı = veritabanındaki kod sayısı.
+    </p>
+    <div class="punch">RAG sistemlerinde en sinsi hata, bilgi tabanının üçte birinin eksik olması.</div>
+  </section>
+
+  <!-- 7 -->
+  <section class="slide">
+    <div class="no"><span>CANLI DEMO</span><span>07 / 10</span></div>
+    <h2>Wi-Fi'yi kapatarak başlıyoruz</h2>
+    <div class="cue">
+      <h4>Demo sırası</h4>
+      <ol>
+        <li><strong>Wi-Fi'yi kapat.</strong> Ekranda uçak modu görünsün.</li>
+        <li><span class="m">F30002 ne demek</span> — anında cevap, manuel metni, sayfa 523</li>
+        <li><span class="m">soğutma fanı çalışmıyor</span> — Türkçe belirti, üç markadan sonuç</li>
+        <li><span class="m">bu sürücünün fiyatı ne kadar</span> — <strong>reddetme</strong></li>
+        <li>Cevabın altındaki <span class="m fo">ağ isteği 0</span> satırını göster</li>
+      </ol>
+    </div>
+    <div class="term">USTA&gt; <b>F30002 ne demek</b>
+
+<b>F30002 — Power unit: DC link voltage overvoltage</b>
+(<b class="r">FAULT — sürücü durur</b>)
+
+Neden:
+- motor regenerates too much energy.
+- line supply voltage too high.
+Çözüm:
+- increase the ramp-down time (p1121).
+
+  Kaynaklar:
+    · F30002 Siemens SINAMICS G120C, s.523
+  [<b class="g">exact</b> | arama 0.0 sn | ağ isteği <b class="g">0</b>]</div>
+  </section>
+
+  <!-- 8 -->
+  <section class="slide">
+    <div class="no"><span>SONUÇLAR</span><span>08 / 10</span></div>
+    <h2>50 soruluk sette ölçüldü</h2>
+    <div class="metrics">
+      <div class="metric"><div class="k">Kod sorguları</div><div class="v">1.00</div><div class="t">recall@3 · hedef 0.95</div></div>
+      <div class="metric"><div class="k">Belirti</div><div class="v">0.90</div><div class="t">recall@3 · hedef 0.80</div></div>
+      <div class="metric"><div class="k">Reddetme</div><div class="v">1.00</div><div class="t">hedef 1.00</div></div>
+      <div class="metric"><div class="k">Sadakat</div><div class="v">0.96</div><div class="t">hedef 0.85</div></div>
+      <div class="metric"><div class="k">Retrieval p95</div><div class="v">3.9</div><div class="t">sn · hedef ≤5</div></div>
+      <div class="metric"><div class="k">Kod sorgusu</div><div class="v">0.0</div><div class="t">sn · model yok</div></div>
+      <div class="metric"><div class="k">Hibrit toplam</div><div class="v miss">12</div><div class="t">sn · hedef ≤5</div></div>
+      <div class="metric"><div class="k">Prosedür</div><div class="v miss">0.70</div><div class="t">recall@3 · kapsam</div></div>
+    </div>
+    <p>
+      <strong>Sekiz hedeften altısı tuttu.</strong> Tutmayan ikisi de
+      açıklanabilir: hibrit gecikme model+donanım sınırı (4B model bu makinede
+      ~20 token/sn), prosedür recall'ı ise bir <strong>kapsam kararının</strong>
+      sonucu — bilgi tabanına yalnızca arıza bölümleri alındı, parametre
+      bölümleri alınmadı.
+    </p>
+    <div class="foot">
+      Koşu <span class="m">CHAT_SEED=42</span> ile tekrarlanabilir · iki ardışık koşu birebir aynı
+    </div>
+  </section>
+
+  <!-- 9 -->
+  <section class="slide">
+    <div class="no"><span>DENEYLER</span><span>09 / 10</span></div>
+    <h2>İki alternatif ölçülerek elendi</h2>
+    <h3>Daha küçük sohbet modeli — 2.6× hızlı</h3>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Model</th><th class="n">Süre</th><th class="n">Sadakat</th><th class="n">Biçim</th></tr></thead>
+        <tbody>
+          <tr><td>qwen3-4b</td><td class="n">18.4 sn</td><td class="n up">1.00</td><td class="n">6/6</td></tr>
+          <tr><td>qwen3.5-2b-text</td><td class="n up">7.2 sn</td><td class="n down">0.80</td><td class="n down">4/6</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      Siemens bağlamı verildi, model cevaba <span class="m fa">2-15</span> diye
+      bir parametre yazdı — bu bir <strong>Danfoss</strong> biçimi ve o bağlamda
+      hiç geçmiyor. Teknisyen yanlış parametreye giderdi. <strong>Elendi.</strong>
+    </p>
+    <h3>Daha büyük embedding modeli — 8B</h3>
+    <p>
+      Çeviri adımını silmedi (çevirisiz 5/8), eşik ayrımını düzeltmedi
+      (−0.010), buna karşılık 16 GB'lik makineyi <strong>takasa itti</strong>
+      (12.7 GB). <strong>Elendi.</strong>
+    </p>
+    <div class="punch">Negatif sonuç da sonuçtur — mevcut kurulum artık savunulmuş durumda.</div>
+  </section>
+
+  <!-- 10 -->
+  <section class="slide">
+    <div class="no"><span>ÇIKARILAN DERS</span><span>10 / 10</span></div>
+    <h2>Prompt bir rica, kod bir garanti</h2>
+    <p class="lead dim">
+      Aynı derse beş kez çarptım. Her seferinde modele talimat vermek yetmedi;
+      çözüm davranışı kodda zorunlu kılmak oldu.
+    </p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Sorun</th><th>Modele bırakınca</th><th>Kodda zorlayınca</th></tr></thead>
+        <tbody>
+          <tr><td>Yanlış kod eşleşmesi</td><td class="down">regex <span class="m">2024</span>'ü kod sandı</td><td class="up">kod kümesi doğrulaması</td></tr>
+          <tr><td>Uydurma cevap</td><td class="down">fiyat sorusuna IGBT cevabı</td><td class="up">benzerlik eşiği</td></tr>
+          <tr><td>Tekrarlama</td><td class="down">aynı cümle 5 kez</td><td class="up">satır tekilleştirme</td></tr>
+          <tr><td>Kaynak atfı</td><td class="down">bazen düşüyor</td><td class="up">veritabanından enjekte</td></tr>
+          <tr><td>Çeviri hatası</td><td class="down">&ldquo;faz kaybı&rdquo; → frequency loss</td><td class="up">terim sözlüğü</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      En kritik örnek reddetme: prompt'a &ldquo;bilmiyorsan söyle&rdquo; yazmak
+      <strong>yetmedi</strong>. Format talimatı ağır basınca model alakasız
+      chunk'lardan cevap uydurdu. Karar deterministik bir eşiğe taşınınca
+      reddetme oranı <span class="m fo">1.00</span> oldu ve orada kaldı.
+    </p>
+    <div class="punch">Güvenlik gerektiren davranışı modele emanet etme.</div>
+    <div class="foot">
+      Sınırlar: hibrit yol ~12 sn · prosedür recall 0.70 · OCR yok · üç sürücü ailesi
+    </div>
+  </section>
+
+</div>
