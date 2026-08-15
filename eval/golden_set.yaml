@@ -1,0 +1,100 @@
+# USTA değerlendirme seti — 50 soru, 5 kategori.
+#
+# KURAL: Bu set proje başında yazılıp DONDURULUR. Sistemin cevaplayabildiği
+# soruları seçmek ölçümü anlamsızlaştırır. İyileştirmeler ölçüm SONRASINDA
+# yapılır, sete bakılarak değil.
+#
+# beklenen : bu kodlardan en az biri ilk K sonuçta olmalı
+# reddetmeli: sistem "Bu bilgi elimdeki dokümanlarda yok" demeli
+#
+# Kategoriler
+#   A  birebir kod sorgusu      (15) — exact yolu
+#   B  belirti tarifi           (10) — hibrit yolu, semantik
+#   C  prosedür / parametre     (10) — hibrit yolu
+#   D  markalar arası           (5)  — çok markalı bilgi tabanının değeri
+#   E  cevaplanamaz             (10) — reddetme davranışı
+
+# ---------------------------------------------------------------- A: kod
+- {id: A01, kategori: A, soru: "F30002 ne demek?", beklenen: [F30002]}
+- {id: A02, kategori: A, soru: "F30003 hatası aldım", beklenen: [F30003]}
+- {id: A03, kategori: A, soru: "F30001 nedir", beklenen: [F30001]}
+- {id: A04, kategori: A, soru: "F07011 hatası ne anlama geliyor", beklenen: [F07011]}
+- {id: A05, kategori: A, soru: "A07910 uyarısı çıktı", beklenen: [A07910]}
+- {id: A06, kategori: A, soru: "F06922 ne demek", beklenen: [F06922]}
+- {id: A07, kategori: A, soru: "A30049 alarmı", beklenen: [A30049]}
+- {id: A08, kategori: A, soru: "F30015 hatası", beklenen: [F30015]}
+- {id: A09, kategori: A, soru: "ABB 2310 hatası ne", beklenen: ["2310"]}
+- {id: A10, kategori: A, soru: "3210 kodu nedir", beklenen: ["3210"]}
+- {id: A11, kategori: A, soru: "3181 hatası aldım", beklenen: ["3181"]}
+- {id: A12, kategori: A, soru: "A2B4 ne demek", beklenen: [A2B4]}
+- {id: A13, kategori: A, soru: "50A0 kodu", beklenen: [50A0]}
+- {id: A14, kategori: A, soru: "ALARM 28 nedir", beklenen: ["28"]}
+- {id: A15, kategori: A, soru: "WARNING/ALARM 4 ne demek", beklenen: ["4"]}
+
+# ------------------------------------------------------------ B: belirti
+- {id: B01, kategori: B, soru: "motor yavaşlarken duruyor ve aşırı gerilim hatası veriyor",
+   beklenen: [F30002, "3210", A3A1, A30502, "7"]}
+- {id: B02, kategori: B, soru: "soğutma fanı çalışmıyor",
+   beklenen: [50A0, "5080", A582, A581, A30049, "104"]}
+- {id: B03, kategori: B, soru: "fren direnci arızalı",
+   beklenen: [F06922, "7181", "7183", "28", "27", "25", A7A2]}
+- {id: B04, kategori: B, soru: "motor aşırı ısındı",
+   beklenen: [A07910, F07011, A07014, "9", "4991"]}
+- {id: B05, kategori: B, soru: "şebekede faz kaybı var",
+   beklenen: ["3130", F30015, "3381", "4", "37"]}
+- {id: B06, kategori: B, soru: "motor kablosunda kısa devre var",
+   beklenen: [A2B4, "2330", "16", F30001, F30051]}
+- {id: B07, kategori: B, soru: "topraklama hatası veriyor",
+   beklenen: ["3181", "45", A2B3, "2330", F30021]}
+- {id: B08, kategori: B, soru: "sürücü aşırı yüklendi",
+   beklenen: ["8002", A8BE, A783, "9", F30005]}
+- {id: B09, kategori: B, soru: "enkoder sinyali kayboldu",
+   beklenen: [F08010, "7301", "61", "90", A07976, A08802]}
+- {id: B10, kategori: B, soru: "haberleşme koptu",
+   beklenen: ["34", A7CE, "6681", "17", F01910]}
+
+# ----------------------------------------------------------- C: prosedür
+- {id: C01, kategori: C, soru: "DC bara aşırı gerilimini önlemek için hangi parametre ayarlanır",
+   beklenen: [F30002, "3210"]}
+- {id: C02, kategori: C, soru: "rampa süresi hangi parametreyle uzatılır",
+   beklenen: [F30002, "3210", A3A1]}
+- {id: C03, kategori: C, soru: "fren direnci nasıl kontrol edilir",
+   beklenen: [F06922, "7181", "28", "25"]}
+- {id: C04, kategori: C, soru: "motor sıcaklık koruması nasıl ayarlanır",
+   beklenen: [A07910, F07011, A07014, "9"]}
+- {id: C05, kategori: C, soru: "yalıtım direnci nasıl ölçülür",
+   beklenen: [A2B4, "2330", "3181", "16"]}
+- {id: C06, kategori: C, soru: "aşırı akım hatasında ne yapılmalı",
+   beklenen: ["2310", F30001, F30055, "13"]}
+- {id: C07, kategori: C, soru: "besleme gerilimi nasıl kontrol edilir",
+   beklenen: [F30003, "3130", A3A2, "4", A30054]}
+- {id: C08, kategori: C, soru: "fan değişimi gerekiyor mu nasıl anlarım",
+   beklenen: [50A0, "5080", A581, A582, A30049]}
+- {id: C09, kategori: C, soru: "sürücü sıfırlama nasıl yapılır",
+   beklenen: [64FF, "80", B686]}
+- {id: C10, kategori: C, soru: "kısa devre şüphesinde hangi ölçümler yapılmalı",
+   beklenen: [A2B4, "2330", F30001, "16"]}
+
+# ------------------------------------------------------- D: markalar arası
+- {id: D01, kategori: D, soru: "aşırı gerilim hatasının ABB'deki kodu nedir",
+   beklenen: ["3210", A3A1]}
+- {id: D02, kategori: D, soru: "Danfoss'ta fren kontrol hatası hangi alarm",
+   beklenen: ["28", "25", "27"]}
+- {id: D03, kategori: D, soru: "Siemens'te motor aşırı sıcaklık kodu",
+   beklenen: [A07910, F07011, A07014]}
+- {id: D04, kategori: D, soru: "topraklama hatası her üç markada nasıl adlandırılıyor",
+   beklenen: ["3181", "45", A2B3, F30021]}
+- {id: D05, kategori: D, soru: "fan arızası ABB ve Siemens'te hangi kodlar",
+   beklenen: [50A0, "5080", A581, A582, A30049]}
+
+# --------------------------------------------------- E: cevaplanamaz
+- {id: E01, kategori: E, soru: "bu sürücünün fiyatı ne kadar", reddetmeli: true}
+- {id: E02, kategori: E, soru: "hangi renk boya kullanılmış", reddetmeli: true}
+- {id: E03, kategori: E, soru: "garanti süresi kaç yıl", reddetmeli: true}
+- {id: E04, kategori: E, soru: "üretici firmanın merkezi nerede", reddetmeli: true}
+- {id: E05, kategori: E, soru: "bu cihaz kaç kilo", reddetmeli: true}
+- {id: E06, kategori: E, soru: "yedek parça siparişini kim veriyor", reddetmeli: true}
+- {id: E07, kategori: E, soru: "bugün hava nasıl", reddetmeli: true}
+- {id: E08, kategori: E, soru: "bu sürücüyü hangi tedarikçiden alabilirim", reddetmeli: true}
+- {id: E09, kategori: E, soru: "servis teknisyeninin telefon numarası nedir", reddetmeli: true}
+- {id: E10, kategori: E, soru: "fabrikada kaç kişi çalışıyor", reddetmeli: true}

@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.py[cod]
+
+# Kaynak manueller telifli — depoya girmez
+data/manuals/
+data/*.db
+
+.DS_Store
+.env
+
+# Kurs dokümanı — bize ait değil, depoya girmez
+Summer School Foundry Local Plan.pdf
+
+# Streamlit yerel çalışma dosyaları
+.streamlit/secrets.toml

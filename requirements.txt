@@ -1,0 +1,8 @@
+# USTA — çekirdek bağımlılıklar (Python 3.12)
+
+foundry-local-sdk>=0.1     # Foundry Local runtime yönetimi
+openai>=1.0                # Foundry Local OpenAI uyumlu endpoint sunuyor
+numpy>=2.0                 # toplu kosinüs benzerliği
+pymupdf>=1.24              # PDF metin ve tablo çıkarımı
+pyyaml>=6.0                # değerlendirme seti (golden_set.yaml)
+streamlit>=1.40          # web arayüzü (app.py)

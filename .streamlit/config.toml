@@ -1,0 +1,23 @@
+# USTA — Streamlit yapılandırması
+#
+# GÜVENLİK: address yalnızca localhost. Varsayılanda Streamlit 0.0.0.0'ı dinler
+# ve "Network URL" / "External URL" yayınlar — yani uygulama yerel ağa, NAT
+# yapılandırmasına bağlı olarak internete açılır. Çevrimdışı çalışması gereken,
+# tesis dokümanı barındıran bir araçta bu kabul edilemez.
+[server]
+address = "localhost"
+headless = true
+port = 8501
+gatherUsageStats = false
+
+[browser]
+gatherUsageStats = false
+
+# TEMA: base/renkler BİLEREK sabitlenmiyor.
+#
+# app.py'daki özel CSS prefers-color-scheme ile açık/koyu arasında geçiş yapıyor.
+# Burada base="light" zorlanınca ikisi çakıştı: Streamlit beyaz zemin çizerken
+# CSS koyu tema metin renklerini kullandı, sonuç beyaz üstüne açık gri oldu.
+# İkisi de tarayıcının sistem tercihini takip ederse tutarlı kalıyor.
+[theme]
+primaryColor = "#334155"
