@@ -8,6 +8,8 @@ bağımlılıksız sayfalardır — tarayıcıda doğrudan açılır, sunucu ger
 | `proje-brief.html` | Proje brief'i v0.4 — 12 bölüm: kapsam, mimari, teknik kararlar, ölçülmüş sonuçlar, model deneyleri, riskler | [claude.ai/code/artifact/7d78d407…](https://claude.ai/code/artifact/7d78d407-c329-448d-9d22-37ca046236eb) |
 | `demo-day-sunum.html` | Demo day sunumu — 10 slayt | [claude.ai/code/artifact/47506073…](https://claude.ai/code/artifact/47506073-f565-4b71-ad99-9f887aaddd29) |
 
+| `video-senaryo.md` | 2 dakikalık tanıtım videosu için çekim planı ve anlatım metni |
+
 ## Açmak
 
 ```bash
