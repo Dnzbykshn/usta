@@ -10,6 +10,7 @@ bağımlılıksız sayfalardır — tarayıcıda doğrudan açılır, sunucu ger
 | `video-senaryo.md` | 2 dakikalık video — kısa versiyon, zamanlanmış çekim planı | — |
 | `video-metni-3dk.md` | 3 dakikalık video — **1. ekip üyesi**: sistem ve mimari | — |
 | `video-metni-3dk-ikinci.md` | 3 dakikalık video — **2. ekip üyesi**: veri ve ölçüm | — |
+| `video-metni-3dk-teknik.md` | 3 dakikalık video — **teknik**: stack, modeller, kurgu | — |
 
 ## Açmak
 
