@@ -11,6 +11,7 @@ bağımlılıksız sayfalardır — tarayıcıda doğrudan açılır, sunucu ger
 | `video-metni-3dk.md` | 3 dakikalık video — **1. ekip üyesi**: sistem ve mimari | — |
 | `video-metni-3dk-ikinci.md` | 3 dakikalık video — **2. ekip üyesi**: veri ve ölçüm | — |
 | `video-metni-3dk-teknik.md` | 3 dakikalık video — **teknik**: stack, modeller, kurgu | — |
+| `video-metni-3dk-karma.md` | 3 dakikalık video — **karma**: teknik + öğrenilenler (tek başına anlatmaya en uygun) | — |
 
 ## Açmak
 
